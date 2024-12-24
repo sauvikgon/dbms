@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Manage Students</h2>
+
+    <!-- Form for Adding a New Student -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Add New Student</h3>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder="Enter Student Name"
+                        class="form-control"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="major" class="form-label">Major</label>
+                    <input
+                        type="text"
+                        name="major"
+                        id="major"
+                        placeholder="Enter Student Major"
+                        class="form-control"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="year" class="form-label">Year</label>
+                    <input
+                        type="number"
+                        name="year"
+                        id="year"
+                        placeholder="Enter Student Year"
+                        class="form-control"
+                        required>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" name="action" value="add" class="btn btn-primary btn-lg">
+                        <i class="bi bi-plus-circle"></i> Add Student
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-dismissible fade show mt-4" role="alert">
+                <strong>{{ messages[0][0] }}</strong> {{ messages[0][1] }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Existing Students Table -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+            <h3 class="mb-0">Existing Students</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Major</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.student_id }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.major }}</td>
+                        <td>{{ student.year }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<!-- Bootstrap Icons CDN for icons -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+
+<!-- Enable tooltips -->
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+</script>
+{% endblock %}
+{% endblock %}

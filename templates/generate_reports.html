@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Reports</h2>
+
+    <!-- GPA Report Section -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">GPA Report</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>GPA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in gpa_report %}
+                    <tr>
+                        <td>{{ row.student_id }}</td>
+                        <td>{{ row.gpa | round(2) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Enrollment by Major Section -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+            <h3 class="mb-0">Enrollment by Major</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Major</th>
+                        <th>Enrollment Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in enrollment_report %}
+                    <tr>
+                        <td>{{ row.major }}</td>
+                        <td>{{ row.enrollment_count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<ul>
+    <li><a href="{{ url_for('manage_students') }}">Manage Students</a></li>
+    <li><a href="{{ url_for('manage_courses') }}">Manage Courses</a></li>
+    <li><a href="{{ url_for('add_grades') }}">Add Grades</a></li>
+    <li><a href="{{ url_for('track_attendance') }}">Track Attendance</a></li>
+    <li><a href="{{ url_for('generate_reports') }}">Generate Reports</a></li>
+</ul>
+{% endblock %}

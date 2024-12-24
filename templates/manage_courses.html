@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Manage Courses</h2>
+
+    <!-- Form for Adding a New Course -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Add New Course</h3>
+        </div>
+        <div class="card-body">
+            <form method="POST" class="form-section">
+                <div class="mb-3">
+                    <label for="course_code" class="form-label">Course Code</label>
+                    <input
+                        type="text"
+                        id="course_code"
+                        name="course_code"
+                        placeholder="Enter Course Code (or choose from dropdown)"
+                        class="form-control"
+                        list="course_codes"
+                        required>
+                    <datalist id="course_codes">
+                        {% for course in courses %}
+                        <option value="{{ course.course_code }}">{{ course.name }}</option>
+                        {% endfor %}
+                    </datalist>
+                </div>
+
+                <div class="mb-3">
+                    <label for="course_name" class="form-label">Course Name</label>
+                    <input
+                        type="text"
+                        id="course_name"
+                        name="name"
+                        placeholder="Enter Course Name"
+                        class="form-control"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="instructor" class="form-label">Instructor</label>
+                    <input
+                        type="text"
+                        id="instructor"
+                        name="instructor"
+                        placeholder="Enter Instructor Name (or choose from dropdown)"
+                        class="form-control"
+                        list="instructors"
+                        required>
+                    <datalist id="instructors">
+                        {% for instructor in instructors %}
+                        <option value="{{ instructor }}">{{ instructor }}</option>
+                        {% endfor %}
+                    </datalist>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" name="action" value="add" class="btn btn-primary btn-lg">
+                        <i class="bi bi-plus-circle"></i> Add Course
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Existing Courses Table -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+            <h3 class="mb-0">Existing Courses</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Instructor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{ course.id }}</td>
+                        <td>{{ course.course_code }}</td>
+                        <td>{{ course.name }}</td>
+                        <td>{{ course.instructor }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<!-- Bootstrap Icons CDN for icons -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+
+<!-- Enable tooltips -->
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+</script>
+{% endblock %}
+{% endblock %}

@@ -65,7 +65,6 @@
                         <th>Course Code</th>
                         <th>Date</th>
                         <th>Attendance Status</th>
-                        <th>Actions</th> <!-- New column for Actions -->
                     </tr>
                 </thead>
                 <tbody>
@@ -75,19 +74,10 @@
                             <td>{{ attendance.course_code }}</td>
                             <td>{{ attendance.date }}</td>
                             <td>{{ attendance.attendance_status }}</td>
-                            <td>
-                                <!-- Form to Delete an Attendance Record -->
-                                <form method="POST" style="display:inline;">
-                                    <input type="hidden" name="attendance_id" value="{{ attendance.id }}">
-                                    <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Attendance">
-                                        <i class="bi bi-trash"></i> Delete
-                                    </button>
-                                </form>
-                            </td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="5" class="text-center">No attendance records found.</td>
+                            <td colspan="4" class="text-center">No attendance records found.</td>
                         </tr>
                     {% endfor %}
                 </tbody>

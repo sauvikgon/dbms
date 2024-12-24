@@ -202,11 +202,12 @@ def generate_reports():
     if 'user_id' not in session:
         return redirect(url_for('login'))
 
-    # GPA
+    # GPA Report with Student Name
     gpa_report = db.session.query(
-        Grade.student_id,
+        Student.student_id,
+        Student.name.label('student_name'),  # Fetch the student name
         db.func.avg(Grade.grade).label('gpa')
-    ).group_by(Grade.student_id).all()
+    ).join(Student, Student.student_id == Grade.student_id).group_by(Student.student_id, Student.name).all()
 
     # Enrollment by Major
     enrollment_report = db.session.query(

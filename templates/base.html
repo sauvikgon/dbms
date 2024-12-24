@@ -13,6 +13,9 @@
 
     <!-- Bootstrap Icons for icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom Dark Mode Style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='darkmode.css') }}" id="dark-mode-stylesheet">
 </head>
 
 <body>
@@ -44,6 +47,13 @@
                             <i class="bi bi-box-arrow-right"></i> Logout
                         </a>
                     </li>
+
+                    <!-- Dark/Light Mode Toggle -->
+                    <li class="nav-item">
+                        <button id="theme-toggle" class="btn btn-outline-light">
+                            <i class="bi bi-brightness-high-fill"></i> <!-- Default light mode icon -->
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -56,6 +66,37 @@
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript for Dark/Light Mode Toggle -->
+    <script>
+        const themeToggleButton = document.getElementById('theme-toggle');
+        const darkModeStylesheet = document.getElementById('dark-mode-stylesheet');
+
+        // Check if the user has a preference saved in localStorage
+        if(localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('bg-dark');
+            document.body.classList.add('text-light');
+            themeToggleButton.innerHTML = '<i class="bi bi-moon-fill"></i>'; // Switch to moon icon
+        }
+
+        // Toggle dark/light mode on button click
+        themeToggleButton.addEventListener('click', () => {
+            const isDarkMode = document.body.classList.contains('bg-dark');
+            if (isDarkMode) {
+                // Switch to light mode
+                document.body.classList.remove('bg-dark');
+                document.body.classList.remove('text-light');
+                themeToggleButton.innerHTML = '<i class="bi bi-brightness-high-fill"></i>'; // Switch to sun icon
+                localStorage.setItem('theme', 'light');
+            } else {
+                // Switch to dark mode
+                document.body.classList.add('bg-dark');
+                document.body.classList.add('text-light');
+                themeToggleButton.innerHTML = '<i class="bi bi-moon-fill"></i>'; // Switch to moon icon
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
 </body>
 
 </html>

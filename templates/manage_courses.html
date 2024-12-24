@@ -73,7 +73,6 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Course Code</th>
                         <th>Course Name</th>
                         <th>Instructor</th>
@@ -82,7 +81,6 @@
                 <tbody>
                     {% for course in courses %}
                     <tr>
-                        <td>{{ course.id }}</td>
                         <td>{{ course.course_code }}</td>
                         <td>{{ course.name }}</td>
                         <td>{{ course.instructor }}</td>
